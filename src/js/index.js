@@ -20,20 +20,18 @@ const controlSearch = async () => {
 		// 2) new search object and add to state
 		state.search = new Search(query);
 		// 3) Prepare UI for results
-
+		searchView.clearInput();
 		// 4) Search for receipes
 		await state.search.getResults();
 
 		// 5) render result on UI
-		console.log(state.search.result, 'test 1');
+		// console.log(state.search.result, 'test 1');
+		searchView.renderResults(state.search.result);
 	}
 };
 
 elements.searchForm.addEventListener('submit', (e) => {
 	e.preventDefault();
+	searchView.clearResult();
 	controlSearch();
 });
-
-const search = new Search('pizza');
-
-search.getResults();
